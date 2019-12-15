@@ -12,7 +12,6 @@ class uwsgi::params {
     $service_name        = 'uwsgi'
     $service_ensure      = true
     $service_enable      = true
-    $service_provider    = 'upstart'
     $manage_service_file = true
     $binary_directory    = '/usr/sbin'
     $config_file         = '/etc/uwsgi.ini'
@@ -30,11 +29,19 @@ class uwsgi::params {
             $python_dev    = 'python-devel'
             $socket        = '/var/run/uwsgi/uwsgi.socket'
         }
+        ubuntu: {
+            $app_directory = '/etc/uwsgi.d'
+            $pidfile       = '/var/run/uwsgi/uwsgi.pid'
+            $python_dev    = 'python-dev'
+            $socket        = '/var/run/uwsgi/uwsgi.socket'
+            $service_provider    = 'systemd'
+        }
         default: {
             $app_directory = '/etc/uwsgi/apps-enabled'
             $pidfile       = '/run/uwsgi/uwsgi.pid'
             $python_dev    = 'python-dev'
             $socket        = '/run/uwsgi/uwsgi.socket'
+            $service_provider    = 'upstart'
         }
     }
 }
