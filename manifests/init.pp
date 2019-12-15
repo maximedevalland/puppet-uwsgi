@@ -120,7 +120,7 @@ class uwsgi (
     $emperor_options     = undef
 ) inherits uwsgi::params {
 
-    validate_re($log_rotate, '^yes$|^no$|^purge$')
+    validate_legacy($log_rotate, '^yes$|^no$|^purge$')
 
     if ! defined(Package[$python_dev]) and $install_python_dev {
         package { $python_dev:
@@ -280,6 +280,6 @@ class uwsgi (
     }
 
     # finally, configure any applications necessary
-    $applications = hiera_hash('uwsgi::app', {})
+    $applications = lookup('uwsgi::app', {})
     create_resources('uwsgi::app', $applications)
 }
