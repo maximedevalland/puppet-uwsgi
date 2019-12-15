@@ -120,7 +120,7 @@ class uwsgi (
     $emperor_options     = undef
 ) inherits uwsgi::params {
 
-    validate_legacy($log_rotate, '^yes$|^no$|^purge$')
+    # validate_re($log_rotate, '^yes$|^no$|^purge$')
 
     if ! defined(Package[$python_dev]) and $install_python_dev {
         package { $python_dev:
