@@ -280,6 +280,6 @@ class uwsgi (
     }
 
     # finally, configure any applications necessary
-    $applications = lookup('uwsgi::app', {})
+    $applications = hiera_hash('uwsgi::app', {})
     create_resources('uwsgi::app', $applications)
 }
