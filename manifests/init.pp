@@ -229,15 +229,7 @@ class uwsgi (
         command => "mkdir -p ${pid_directory}",
         path    => $::path
     } -> file { $pid_directory: }
-
-    if $socket_directory != $pid_directory {
-      exec { $socket_directory:
-          creates => $socket_directory,
-          command => "mkdir -p ${socket_directory}",
-          path    => $::path
-      } -> file { $socket_directory: }
-    }
-
+    
     file { $app_directory:
         ensure  => 'directory',
         owner   => 'root',
