@@ -204,7 +204,7 @@ class uwsgi (
           content => template($service_template_real),
           require => Package[$package_name]
       }
-      $required_files = [ $config_file, $service_file_real ]
+      $required_files = [  $service_file_real ]
 
       if $service_provider == 'systemd' {
         exec { 'uwsgi-reload-systemd':
@@ -214,8 +214,6 @@ class uwsgi (
           before      => Service[$service_name],
         }
       }
-    } else {
-      $required_files = $config_file
     }
 
     $log_directory = dirname($log_file)
