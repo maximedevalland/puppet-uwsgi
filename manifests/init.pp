@@ -105,6 +105,7 @@ class uwsgi (
     $service_enable      = $uwsgi::params::service_enable,
     $service_provider    = $uwsgi::params::service_provider,
     $manage_service_file = $uwsgi::params::manage_service_file,
+    $manage_config_file  = $uwsgi::params::manage_config_file,
     $binary_directory    = $uwsgi::params::binary_directory,
     $config_file         = $uwsgi::params::config_file,
     $log_file            = $uwsgi::params::log_file,
@@ -148,14 +149,16 @@ class uwsgi (
         'purged' => 'absent',
         default  => 'present'
     }
-
-    file { $config_file:
-        ensure  => $file_ensure,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => template('uwsgi/uwsgi.ini.erb'),
-        require => Package[$package_name]
+    
+    if $manage_config_file == true {
+        file { $config_file:
+            ensure  => $file_ensure,
+            owner   => 'root',
+            group   => 'root',
+            mode    => '0644',
+            content => template('uwsgi/uwsgi.ini.erb'),
+            require => Package[$package_name]
+        }
     }
 
     if $manage_service_file == true {
