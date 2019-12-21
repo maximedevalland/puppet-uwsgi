@@ -117,7 +117,8 @@ class uwsgi (
     $python_dev          = $uwsgi::params::python_dev,
     $pidfile             = $uwsgi::params::pidfile,
     $socket              = $uwsgi::params::socket,
-    $emperor_options     = undef
+    $emperor_options     = undef,
+    $additional_options  = undef
 ) inherits uwsgi::params {
 
     # validate_re($log_rotate, '^yes$|^no$|^purge$')
