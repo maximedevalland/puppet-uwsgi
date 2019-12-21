@@ -13,6 +13,7 @@ class uwsgi::params {
     $service_ensure      = true
     $service_enable      = true
     $manage_service_file = true
+    $manage_config_file  = false
     $binary_directory    = '/usr/sbin'
     $config_file         = '/etc/uwsgi.ini'
     $tyrant              = true
